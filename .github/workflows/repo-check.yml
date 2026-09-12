@@ -1,0 +1,35 @@
+name: Repository Structure Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-required-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Activity 5 structure
+        run: |
+          test -f README.md
+          test -f .gitignore
+          test -d frontend
+          test -d backend
+          test -d ai-service
+          test -d database
+          test -d docs
+          test -f frontend/App.tsx
+          test -f backend/src/main.ts
+          test -f ai-service/main.py
+          test -f database/schema.sql
+          test -f docs/01-frontend-comparison.md
+          test -f docs/02-backend-database-auth-comparison.md
+          test -f docs/03-technology-comparison-matrix.md
+          test -f docs/04-weighted-decision-matrix.md
+          test -f docs/05-tech-stack-summary.md
+          test -f docs/adr/ADR-001-technology-stack.md
+          test -f docs/architecture/fitflow-high-level-architecture.png
